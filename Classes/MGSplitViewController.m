@@ -142,6 +142,7 @@
 	_dividerView.splitViewController = self;
 	_dividerView.backgroundColor = MG_DEFAULT_CORNER_COLOR;
 	_dividerStyle = MGSplitViewDividerStyleThin;
+    self.view.autoresizesSubviews = NO;
 }
 
 
@@ -161,6 +162,14 @@
 
 #pragma mark -
 #pragma mark View management
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -940,7 +949,7 @@
 - (UIViewController *)masterViewController
 {
 	if (_viewControllers && [_viewControllers count] > 0) {
-		NSObject *controller = [_viewControllers objectAtIndex:0];
+        id controller = [_viewControllers objectAtIndex:0];
 		if ([controller isKindOfClass:[UIViewController class]]) {
 			return [[controller retain] autorelease];
 		}
